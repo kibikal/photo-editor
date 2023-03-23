@@ -4,7 +4,7 @@ import { Button, IconButton } from "@mui/material";
 import { Typography } from "@mui/material";
 import Draggable from "react-draggable";
 import { Download, FileUpload } from "@mui/icons-material";
-
+import {styled} from "@mui/system"
 import uenrLogo from "./uenr-logo.png";
 import hostlinkLogo from "./hostlink-logo.jpg"
 import { Box } from "@mui/system";
@@ -66,6 +66,13 @@ function App() {
     img.src = image;
   };
 
+
+  const DispImage = styled("img")({
+    maxWidth: "90%",
+    maxHeight: "auto",
+    textAlign: "center"
+  });
+
   return (
     <div className={classes.root}>
       <input
@@ -85,7 +92,15 @@ function App() {
         </IconButton>
       </label>
       <Box>
-        <Button sx={{margin:"5px 0"}} variant="contained" onClick={()=>{setLogo(logo === uenrLogo ? hostlinkLogo : uenrLogo)}}>Switch logo</Button>
+        <Button
+          sx={{ margin: "5px 0" }}
+          variant="contained"
+          onClick={() => {
+            setLogo(logo === uenrLogo ? hostlinkLogo : uenrLogo);
+          }}
+        >
+          Switch logo
+        </Button>
       </Box>
       {image ? (
         <div className={classes.previewContainer}>
@@ -99,13 +114,21 @@ function App() {
               <img src={logo} alt="logo" />
             </div>
           </Draggable>
-          <img src={image} alt="preview" />
+          <div className="disp-image">
+            <DispImage src={image} alt="preview" />
+          </div>
         </div>
       ) : (
         <Typography>Upload an image</Typography>
       )}
       {image && (
-        <Button startIcon={<Download/>} variant="contained" color="primary" onClick={handleDownload}>
+        <Button
+        sx={{margin:"5px 0"}}
+          startIcon={<Download />}
+          variant="contained"
+          color="primary"
+          onClick={handleDownload}
+        >
           Save
         </Button>
       )}
